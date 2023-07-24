@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: solid_wast_dss
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_DATABASE=solid_wast_dss
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./docker-database:/var/lib/mysql
+    networks:
+      - mysql-phpmyadmin
+
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      - PMA_HOST=database
+      - MYSQL_DATABASE=solid_wast_dss
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - mysql-phpmyadmin
+
+networks:
+  mysql-phpmyadmin:
