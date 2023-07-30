@@ -1,0 +1,49 @@
+CNPJ do destinador;
+Razão Social do destinador;
+Estado;
+Município;
+Código da Categoria;
+Categoria de Atividade;
+Código do Detalhe;
+Detalhe;
+CNPJ do gerador do resíduo;
+Raz soc do gerador do resíduo;
+Cód. Resíduo;
+Desc. Resíduo;
+Ano - destinação;
+Quant. destinada;
+Unidade;
+Tipo de destinação;
+Situação Cadastral
+
+
+## tabelas modelagem relacional base
+
+entidades
+    - cnpj
+    - razao_social
+
+locais
+    - municipio
+    - estado
+
+categorias
+    - id
+    - descricao
+
+detalhes
+    - id
+    - detalhe
+
+residuos
+    - id
+    - descricao
+
+destinacoes
+    - entidades_destinador_id
+    - entidades_gerador_id
+    - quantidade_destinada
+    - unidade_medida
+    - locais_id
+    - tipo_destinacao
+    - situacao_cadastral
