@@ -28,7 +28,6 @@ CREATE TABLE dim_residuos (
 
 -- Tabela de Fatos
 CREATE TABLE fat_destinacoes (
-    id INT PRIMARY KEY,
     entidades_destinador_id INT NOT NULL,
     entidades_gerador_id INT NOT NULL,
     quantidade_destinada DECIMAL(18, 2) NOT NULL,
@@ -40,6 +39,7 @@ CREATE TABLE fat_destinacoes (
     tipo VARCHAR(100) NOT NULL,
     ano INT NOT NULL,
     situacao_cadastral VARCHAR(100) NOT NULL,
+    PRIMARY KEY (entidades_destinador_id, entidades_gerador_id, locais_id, detalhes_id, residuos_id, categorias_id, tipo, ano),
     FOREIGN KEY (entidades_destinador_id) REFERENCES dim_entidades (id),
     FOREIGN KEY (entidades_gerador_id) REFERENCES dim_entidades (id),
     FOREIGN KEY (locais_id) REFERENCES dim_locais (id),
@@ -47,3 +47,4 @@ CREATE TABLE fat_destinacoes (
     FOREIGN KEY (residuos_id) REFERENCES dim_residuos (id),
     FOREIGN KEY (categorias_id) REFERENCES dim_categorias (id)
 );
+

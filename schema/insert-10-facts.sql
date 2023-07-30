@@ -44,15 +44,15 @@ VALUES
     (5, 'Tratamento e destinação de resíduos industriais líquidos e sólidos');
 
 -- Inserção de dados na tabela fat_destinacoes
-INSERT INTO fat_destinacoes (id, entidades_destinador_id, entidades_gerador_id, quantidade_destinada, unidade_medida, locais_id, detalhes_id, residuos_id, categorias_id, tipo, ano, situacao_cadastral)
+INSERT INTO fat_destinacoes (entidades_destinador_id, entidades_gerador_id, quantidade_destinada, unidade_medida, locais_id, detalhes_id, residuos_id, categorias_id, tipo, ano, situacao_cadastral)
 VALUES
-    (1, 1, 2, 100.50, 'Kg', 1, 1, 2, 1, 'Tipo A', 2022, 'Ativo'),
-    (2, 3, 4, 250.75, 'Kg', 2, 2, 3, 2, 'Tipo B', 2022, 'Ativo'),
-    (3, 5, 1, 180.25, 'Kg', 3, 3, 4, 3, 'Tipo C', 2022, 'Inativo'),
-    (4, 2, 3, 500.00, 'Kg', 4, 4, 5, 4, 'Tipo D', 2022, 'Ativo'),
-    (5, 4, 5, 300.35, 'Kg', 5, 5, 1, 5, 'Tipo E', 2022, 'Inativo'),
-    (6, 1, 2, 70.20, 'Kg', 1, 1, 2, 1, 'Tipo A', 2022, 'Ativo'),
-    (7, 3, 4, 180.80, 'Kg', 2, 2, 3, 2, 'Tipo B', 2022, 'Ativo'),
-    (8, 5, 1, 230.40, 'Kg', 3, 3, 4, 3, 'Tipo C', 2022, 'Inativo'),
-    (9, 2, 3, 410.10, 'Kg', 4, 4, 5, 4, 'Tipo D', 2022, 'Ativo'),
-    (10, 4, 5, 290.60, 'Kg', 5, 5, 1, 5, 'Tipo E', 2022, 'Inativo');
+    (1, 2, 100.50, 'Kg', 1, 1, 2, 2, 'Tipo A', 2022, 'Ativo'),
+    (3, 4, 250.75, 'Kg', 2, 2, 3, 5, 'Tipo B', 2022, 'Ativo'),
+    (5, 1, 180.25, 'Kg', 3, 3, 4, 2, 'Tipo C', 2022, 'Inativo'),
+    (2, 3, 500.00, 'Kg', 4, 4, 5, 3, 'Tipo D', 2022, 'Ativo'),
+    (4, 5, 300.35, 'Kg', 5, 5, 1, 4, 'Tipo E', 2022, 'Inativo'),
+    (1, 2, 70.20, 'Kg', 1, 1, 2, 1, 'Tipo A', 2022, 'Ativo'),
+    (3, 4, 180.80, 'Kg', 2, 2, 3, 2, 'Tipo B', 2022, 'Ativo'),
+    (5, 1, 230.40, 'Kg', 3, 3, 4, 3, 'Tipo C', 2022, 'Inativo'),
+    (2, 3, 410.10, 'Kg', 4, 4, 5, 4, 'Tipo D', 2022, 'Ativo'),
+    (4, 5, 290.60, 'Kg', 5, 5, 1, 5, 'Tipo E', 2022, 'Inativo');
