@@ -19,6 +19,3 @@ O repositório está organizado da seguinte forma:
 schema: Contém os scripts SQL para criação das tabelas no banco de dados.
 docs: Inclui a documentação do projeto, como a modelagem dimensional e especificações técnicas.
 data: Armazena os dados de exemplo utilizados para testes e demonstrações do Data Mart.
-
-Licença
-[Incluir a licença utilizada no projeto, se aplicável]
