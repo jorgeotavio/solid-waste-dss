@@ -1,50 +1,60 @@
 -- Tabelas de Dimensão
-CREATE TABLE dim_entidades (
-    id INT PRIMARY KEY,
+CREATE TABLE dim_entidades_geradoras (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cnpj VARCHAR(18) NOT NULL,
+    razao_social VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE dim_entidades_destino (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     cnpj VARCHAR(18) NOT NULL,
     razao_social VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE dim_locais (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     municipio VARCHAR(100) NOT NULL,
     estado VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE dim_categorias (
-    id INT PRIMARY KEY,
+CREATE TABLE dim_categorias_geradoras (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(200) NOT NULL
-);
-
-CREATE TABLE dim_detalhes (
-    id INT PRIMARY KEY,
-    detalhe VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE dim_residuos (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE dim_tipo_destinacao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_destinacao VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE dim_ano (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ano VARCHAR(4) NOT NULL
 );
 
 -- Tabela de Fatos
 CREATE TABLE fat_destinacoes (
-    entidades_destinador_id INT NOT NULL,
-    entidades_gerador_id INT NOT NULL,
+    entidades_geradoras_id INT NOT NULL,
+    entidades_destino_id INT NOT NULL,
     quantidade_destinada DECIMAL(18, 2) NOT NULL,
     unidade_medida VARCHAR(50) NOT NULL,
     locais_id INT NOT NULL,
-    detalhes_id INT NOT NULL,
     residuos_id INT NOT NULL,
-    categorias_id INT NOT NULL,
-    tipo VARCHAR(100) NOT NULL,
-    ano INT NOT NULL,
+    categorias_geradoras_id INT NOT NULL,
+    tipo_destinacao_id INT NOT NULL,
+    ano_id INT NOT NULL,
     situacao_cadastral VARCHAR(100) NOT NULL,
-    PRIMARY KEY (entidades_destinador_id, entidades_gerador_id, locais_id, detalhes_id, residuos_id, categorias_id, tipo, ano),
-    FOREIGN KEY (entidades_destinador_id) REFERENCES dim_entidades (id),
-    FOREIGN KEY (entidades_gerador_id) REFERENCES dim_entidades (id),
+    PRIMARY KEY (entidades_geradoras_id, entidades_destino_id, locais_id, residuos_id, categorias_geradoras_id, tipo_destinacao_id, ano_id),
+    FOREIGN KEY (entidades_geradoras_id) REFERENCES dim_entidades_geradoras (id),
+    FOREIGN KEY (entidades_destino_id) REFERENCES dim_entidades_destino (id),
     FOREIGN KEY (locais_id) REFERENCES dim_locais (id),
-    FOREIGN KEY (detalhes_id) REFERENCES dim_detalhes (id),
     FOREIGN KEY (residuos_id) REFERENCES dim_residuos (id),
-    FOREIGN KEY (categorias_id) REFERENCES dim_categorias (id)
+    FOREIGN KEY (categorias_geradoras_id) REFERENCES dim_categorias_geradoras (id),
+    FOREIGN KEY (tipo_destinacao_id) REFERENCES dim_tipo_destinacao (id),
+    FOREIGN KEY (ano_id) REFERENCES dim_ano (id)
 );
-
