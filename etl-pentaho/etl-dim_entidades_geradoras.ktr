@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>etl-dim_local</name>
+    <name>etl-dim_tipo_destinacao</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/08/07 14:37:47.647</created_date>
+    <created_date>2023/08/08 20:34:47.010</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/08/07 14:37:47.647</modified_date>
+    <modified_date>2023/08/08 20:34:47.010</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -501,23 +500,23 @@
   </connection>
   <order>
     <hop>
+      <from>Sort rows</from>
+      <to>Unique rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>CSV file input</from>
-      <to>Select values</to>
+      <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Unique rows</from>
       <to>Table output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -545,11 +544,11 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <name>CNPJ do destinador</name>
-        <type>Timestamp</type>
+        <type>String</type>
         <format/>
         <currency>R$</currency>
         <decimal>,</decimal>
@@ -565,7 +564,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>61</length>
+        <length>51</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -576,7 +575,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>16</length>
+        <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -587,7 +586,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>20</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -609,7 +608,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>47</length>
+        <length>21</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -631,12 +630,12 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>151</length>
+        <length>68</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>CNPJ do gerador do resÃ­duo</name>
+        <name>CNPJ do gerador do resíduo</name>
         <type>String</type>
         <format/>
         <currency>R$</currency>
@@ -647,13 +646,13 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Raz soc do gerador do resÃ­duo</name>
+        <name>Raz soc do gerador do resíduo</name>
         <type>String</type>
         <format/>
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>75</length>
+        <length>53</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -675,7 +674,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>104</length>
+        <length>87</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -697,7 +696,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>14</length>
+        <length>13</length>
         <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
@@ -719,7 +718,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>100</length>
+        <length>93</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -730,7 +729,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>9</length>
+        <length>5</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -744,13 +743,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>208</yloc>
+      <xloc>64</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Select values 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -762,10 +761,12 @@
     </partitioning>
     <fields>
       <field>
-        <name>Estado</name>
+        <name>CNPJ do gerador do resíduo</name>
+        <rename>cnpj</rename>
       </field>
       <field>
-        <name>Município</name>
+        <name>Raz soc do gerador do resíduo</name>
+        <rename>razao_social</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -778,8 +779,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>208</yloc>
+      <xloc>176</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -803,7 +804,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Município</name>
+        <name>cnpj</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -811,7 +812,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>Estado</name>
+        <name>razao_social</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -828,8 +829,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>208</yloc>
+      <xloc>288</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -846,7 +847,7 @@
     </partitioning>
     <connection>solid waste dimensional</connection>
     <schema/>
-    <table>dim_locais</table>
+    <table>dim_entidades_geradoras</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -863,12 +864,12 @@
     <return_field/>
     <fields>
       <field>
-        <column_name>estado</column_name>
-        <stream_name>Estado</stream_name>
+        <column_name>cnpj</column_name>
+        <stream_name>cnpj</stream_name>
       </field>
       <field>
-        <column_name>municipio</column_name>
-        <stream_name>Município</stream_name>
+        <column_name>razao_social</column_name>
+        <stream_name>razao_social</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -880,8 +881,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>208</yloc>
+      <xloc>512</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -902,11 +903,19 @@
     <error_description/>
     <fields>
       <field>
-        <name>Estado</name>
+        <name>cnpj</name>
         <case_insensitive>Y</case_insensitive>
       </field>
       <field>
-        <name>Município</name>
+        <name>cnpj</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>cnpj</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+      <field>
+        <name>razao_social</name>
         <case_insensitive>Y</case_insensitive>
       </field>
     </fields>
@@ -919,8 +928,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>208</yloc>
+      <xloc>400</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>etl-dim_local</name>
+    <name>etl-dim_tipo_destinacao</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/08/07 14:37:47.647</created_date>
+    <created_date>2023/08/08 20:34:47.010</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/08/07 14:37:47.647</modified_date>
+    <modified_date>2023/08/08 20:34:47.010</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -506,18 +505,28 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique rows</from>
-      <to>Table output</to>
+      <from>Sort rows</from>
+      <to>Unique rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values</from>
+      <to>Split fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Split fields</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
+      <from>Unique rows</from>
+      <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -545,11 +554,11 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <fields>
       <field>
         <name>CNPJ do destinador</name>
-        <type>Timestamp</type>
+        <type>String</type>
         <format/>
         <currency>R$</currency>
         <decimal>,</decimal>
@@ -565,7 +574,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>61</length>
+        <length>51</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -576,7 +585,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>16</length>
+        <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -587,7 +596,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>20</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -609,7 +618,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>47</length>
+        <length>21</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -631,12 +640,12 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>151</length>
+        <length>68</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>CNPJ do gerador do resÃ­duo</name>
+        <name>CNPJ do gerador do resíduo</name>
         <type>String</type>
         <format/>
         <currency>R$</currency>
@@ -647,13 +656,13 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Raz soc do gerador do resÃ­duo</name>
+        <name>Raz soc do gerador do resíduo</name>
         <type>String</type>
         <format/>
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>75</length>
+        <length>53</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -675,7 +684,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>104</length>
+        <length>87</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -697,7 +706,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>14</length>
+        <length>13</length>
         <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
@@ -719,7 +728,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>100</length>
+        <length>93</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -730,7 +739,7 @@
         <currency>R$</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>9</length>
+        <length>5</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -744,8 +753,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>208</yloc>
+      <xloc>64</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -762,10 +771,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>Estado</name>
-      </field>
-      <field>
-        <name>Município</name>
+        <name>Tipo de destinação</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -778,8 +784,39 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>208</yloc>
+      <xloc>160</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>tipo_destinacao</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -803,15 +840,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Município</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>Estado</name>
+        <name>tipo_destinacao</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -828,14 +857,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>208</yloc>
+      <xloc>480</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Split fields</name>
+    <type>FieldSplitter</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -844,31 +873,39 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>solid waste dimensional</connection>
-    <schema/>
-    <table>dim_locais</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <splitfield>Tipo de destinação</splitfield>
+    <delimiter> - </delimiter>
+    <enclosure/>
     <fields>
       <field>
-        <column_name>estado</column_name>
-        <stream_name>Estado</stream_name>
+        <name>sigla</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
       </field>
       <field>
-        <column_name>municipio</column_name>
-        <stream_name>Município</stream_name>
+        <name>tipo_destinacao</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
       </field>
     </fields>
     <attributes/>
@@ -880,8 +917,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>208</yloc>
+      <xloc>272</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -902,11 +939,7 @@
     <error_description/>
     <fields>
       <field>
-        <name>Estado</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-      <field>
-        <name>Município</name>
+        <name>tipo_destinacao</name>
         <case_insensitive>Y</case_insensitive>
       </field>
     </fields>
@@ -919,8 +952,56 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>208</yloc>
+      <xloc>576</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>solid waste dimensional</connection>
+    <schema/>
+    <table>dim_tipo_destinacao</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>tipo_destinacao</column_name>
+        <stream_name>tipo_destinacao</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

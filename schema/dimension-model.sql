@@ -5,7 +5,7 @@ CREATE TABLE dim_entidades_geradoras (
     razao_social VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE dim_entidades_destino (
+CREATE TABLE dim_entidades_destinadoras (
     id INT PRIMARY KEY AUTO_INCREMENT,
     cnpj VARCHAR(18) NOT NULL,
     razao_social VARCHAR(200) NOT NULL
@@ -41,13 +41,13 @@ CREATE TABLE dim_ano (
 CREATE TABLE fat_destinacoes (
     entidades_geradoras_id INT NOT NULL,
     entidades_destino_id INT NOT NULL,
-    quantidade_destinada DECIMAL(18, 2) NOT NULL,
-    unidade_medida VARCHAR(50) NOT NULL,
     locais_id INT NOT NULL,
     residuos_id INT NOT NULL,
     categorias_geradoras_id INT NOT NULL,
     tipo_destinacao_id INT NOT NULL,
     ano_id INT NOT NULL,
+    quantidade_destinada DECIMAL(18, 2) NOT NULL,
+    unidade_medida VARCHAR(50) NOT NULL,
     situacao_cadastral VARCHAR(100) NOT NULL,
     PRIMARY KEY (entidades_geradoras_id, entidades_destino_id, locais_id, residuos_id, categorias_geradoras_id, tipo_destinacao_id, ano_id),
     FOREIGN KEY (entidades_geradoras_id) REFERENCES dim_entidades_geradoras (id),
