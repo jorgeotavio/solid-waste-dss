@@ -769,6 +769,14 @@
         <name>Razão Social do destinador</name>
         <rename>razao_social</rename>
       </field>
+      <field>
+        <name>Município</name>
+        <rename>municipio</rename>
+      </field>
+      <field>
+        <name>Estado</name>
+        <rename>estado</rename>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
@@ -872,6 +880,14 @@
         <column_name>razao_social</column_name>
         <stream_name>razao_social</stream_name>
       </field>
+      <field>
+        <column_name>municipio</column_name>
+        <stream_name>municipio</stream_name>
+      </field>
+      <field>
+        <column_name>estado</column_name>
+        <stream_name>estado</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -903,14 +919,6 @@
     <reject_duplicate_row>N</reject_duplicate_row>
     <error_description/>
     <fields>
-      <field>
-        <name>cnpj</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-      <field>
-        <name>cnpj</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
       <field>
         <name>cnpj</name>
         <case_insensitive>Y</case_insensitive>

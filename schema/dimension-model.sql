@@ -8,11 +8,7 @@ CREATE TABLE dim_entidades_geradoras (
 CREATE TABLE dim_entidades_destinadoras (
     id INT PRIMARY KEY AUTO_INCREMENT,
     cnpj VARCHAR(18) NOT NULL,
-    razao_social VARCHAR(200) NOT NULL
-);
-
-CREATE TABLE dim_locais (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    razao_social VARCHAR(200) NOT NULL,
     municipio VARCHAR(100) NOT NULL,
     estado VARCHAR(100) NOT NULL
 );
@@ -40,7 +36,7 @@ CREATE TABLE dim_ano (
 -- Tabela de Fatos
 CREATE TABLE fat_destinacoes (
     entidades_geradoras_id INT NOT NULL,
-    entidades_destino_id INT NOT NULL,
+    entidades_destinadoras_id INT NOT NULL,
     locais_id INT NOT NULL,
     residuos_id INT NOT NULL,
     categorias_geradoras_id INT NOT NULL,
@@ -49,10 +45,9 @@ CREATE TABLE fat_destinacoes (
     quantidade_destinada DECIMAL(18, 2) NOT NULL,
     unidade_medida VARCHAR(50) NOT NULL,
     situacao_cadastral VARCHAR(100) NOT NULL,
-    PRIMARY KEY (entidades_geradoras_id, entidades_destino_id, locais_id, residuos_id, categorias_geradoras_id, tipo_destinacao_id, ano_id),
+    PRIMARY KEY (entidades_geradoras_id, entidades_destinadoras_id, residuos_id, categorias_geradoras_id, tipo_destinacao_id, ano_id),
     FOREIGN KEY (entidades_geradoras_id) REFERENCES dim_entidades_geradoras (id),
-    FOREIGN KEY (entidades_destino_id) REFERENCES dim_entidades_destino (id),
-    FOREIGN KEY (locais_id) REFERENCES dim_locais (id),
+    FOREIGN KEY (entidades_destinadoras_id) REFERENCES dim_entidades_destinadoras (id),
     FOREIGN KEY (residuos_id) REFERENCES dim_residuos (id),
     FOREIGN KEY (categorias_geradoras_id) REFERENCES dim_categorias_geradoras (id),
     FOREIGN KEY (tipo_destinacao_id) REFERENCES dim_tipo_destinacao (id),
