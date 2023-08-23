@@ -37,7 +37,6 @@ CREATE TABLE dim_ano (
 CREATE TABLE fat_destinacoes (
     entidades_geradoras_id INT NOT NULL,
     entidades_destinadoras_id INT NOT NULL,
-    locais_id INT NOT NULL,
     residuos_id INT NOT NULL,
     categorias_geradoras_id INT NOT NULL,
     tipo_destinacao_id INT NOT NULL,
