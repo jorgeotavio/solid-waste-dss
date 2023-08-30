@@ -10,6 +10,7 @@ CREATE TABLE dim_entidades_destinadoras (
     cnpj VARCHAR(18) NOT NULL,
     razao_social VARCHAR(200) NOT NULL,
     municipio VARCHAR(100) NOT NULL,
+    regiao VARCHAR(100) NOT NULL,
     estado VARCHAR(100) NOT NULL
 );
 
